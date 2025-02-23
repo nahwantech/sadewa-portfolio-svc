@@ -1,0 +1,22 @@
+type MstPortfolio {
+    id: ID!
+    Title: String!
+    Description: String!
+    BackendStack: String!
+    FrontendStack: String!
+    DatabaseStack: String!
+    DeploymentStack: String!
+    CreatedAt: String!
+    CreatedBy: String!
+    UpdatedAt: String!
+    IsActive: String!
+}
+
+extend type Query {
+    mstportfolio(id: ID!): MstPortfolio
+    mstpoftfolios: [MstPortfolio!]
+}
+
+extend type Mutation {
+    createMstPortfolio(text: String!, portfolioId: ID!): MstPortfolio!
+}
