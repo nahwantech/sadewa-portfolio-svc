@@ -14,7 +14,7 @@ import (
 	"github.com/vektah/gqlparser/v2/ast"
 )
 
-const defaultPort = "8080"
+const defaultPort = "8089"
 
 func main() {
 	port := os.Getenv("PORT")
