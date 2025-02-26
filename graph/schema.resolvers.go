@@ -6,10 +6,10 @@ package graph
 
 import (
 	"context"
-	"fmt"
-	"sadewa-portfolio-svc/graph/model"
 	"crypto/rand"
+	"fmt"
 	"math/big"
+	"sadewa-portfolio-svc/model"
 )
 
 // Mutation returns MutationResolver implementation.

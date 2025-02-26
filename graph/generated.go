@@ -8,7 +8,7 @@ import (
 	"embed"
 	"errors"
 	"fmt"
-	"sadewa-portfolio-svc/graph/model"
+	"sadewa-portfolio-svc/model"
 	"strconv"
 	"sync"
 	"sync/atomic"

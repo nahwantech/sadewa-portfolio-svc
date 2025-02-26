@@ -3,8 +3,6 @@ package model
 import (
 	"fmt"
 	"log"
-	"os"
-	"time"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -19,10 +17,10 @@ func ConnectDatabase() {
 	var err error
 
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.info), // Enable logging for queries
+		Logger: logger.Default.LogMode(logger.Info), // Enable logging for queries
 	})
 
-	if err != null {
+	if err != nil {
 		log.Fatal("Failed to migrate database : ", err)
 	}
 

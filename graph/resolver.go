@@ -5,10 +5,10 @@ package graph
 // It serves as dependency injection for your app, add any dependencies you require here.
 
 import (
-	"sadewa-portfolio-svc/graph/model"
+	"sadewa-portfolio-svc/model"
 )
 
-type Resolver struct{
-	todos []*model.Todo
+type Resolver struct {
+	todos         []*model.Todo
 	mstportfolios []*model.MstPortfolio
 }
