@@ -10,14 +10,14 @@ import (
 	"sadewa-portfolio-svc/graph/model"
 )
 
-// CreateTodo is the resolver for the createTodo field.
-func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
-	panic(fmt.Errorf("not implemented: CreateTodo - createTodo"))
+// CreateMstPortfolio is the resolver for the createMstPortfolio field.
+func (r *mutationResolver) CreateMstPortfolio(ctx context.Context, input model.NewMstPortfolio) (*model.MstPortfolio, error) {
+	panic(fmt.Errorf("not implemented: CreateMstPortfolio - createMstPortfolio"))
 }
 
-// Todos is the resolver for the todos field.
-func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	panic(fmt.Errorf("not implemented: Todos - todos"))
+// Mstportfolio is the resolver for the mstportfolio field.
+func (r *queryResolver) Mstportfolio(ctx context.Context) ([]*model.MstPortfolio, error) {
+	panic(fmt.Errorf("not implemented: Mstportfolio - mstportfolio"))
 }
 
 // Mutation returns MutationResolver implementation.
