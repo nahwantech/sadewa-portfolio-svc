@@ -1,5 +1,5 @@
-# Golang version
-This project is using golang version 1.24.0, to change the version using syntax : vfox use golang , then chose the version by retyping.
+# golang version
+This project using the golang version 1.24.0, you can use vfox to switch the version. Syntax : vfox use golang, then just pick the version.
 
-# To Execute the project syntax
+# Execute the apps
 go run sadewa-portfolio-svc generate

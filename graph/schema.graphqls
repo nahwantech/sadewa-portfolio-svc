@@ -1,4 +1,36 @@
-schema {
-  query: Query
-  mutation: Mutation
+
+type MstPortfolio{
+  id: ID!
+  title: String!
+  description: String!
+  backendstack: String!
+  frontendstack: String!
+  databasestack: String!
+  deploymentstack: String!
+  createdat: String!
+  createdby: String!
+  updatedat: String!
+  updatedby: String!
+}
+
+input NewMstPortfolio{
+  id: ID!
+  title: String!
+  description: String!
+  backendstack: String!
+  frontendstack: String!
+  databasestack: String!
+  deploymentstack: String!
+  createdat: String!
+  createdby: String!
+  updatedat: String!
+  updatedby: String!
+}
+
+type Query {
+  mstportfolio: [MstPortfolio!]!
+}
+
+type Mutation {
+  createMstPortfolio(input: NewMstPortfolio!): MstPortfolio!
 }

@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"sadewa-portfolio-svc/graph"
+	"sadewa-portfolio-svc/config"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/handler/extension"
@@ -17,10 +18,14 @@ import (
 const defaultPort = "8089"
 
 func main() {
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = defaultPort
 	}
+
+	// Database connection 
+	database.ConnectDB()
 
 	srv := handler.New(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{}}))
 
