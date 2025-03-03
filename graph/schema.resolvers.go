@@ -20,6 +20,12 @@ func (r *queryResolver) Mstportfolio(ctx context.Context) ([]*model.MstPortfolio
 	panic(fmt.Errorf("not implemented: Mstportfolio - mstportfolio"))
 }
 
+// MstPortfolio is the resolver for the mstPortfolio field.
+func (r *queryResolver) MstPortfolio(ctx context.Context, id string) (*model.MstPortfolio, error) {
+	// panic(fmt.Errorf("not implemented: MstPortfolio - mstPortfolio"))
+	return &resolver.QueryResolver{DB: r.DB}
+}
+
 // Mutation returns MutationResolver implementation.
 func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
 
@@ -28,3 +34,4 @@ func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
+

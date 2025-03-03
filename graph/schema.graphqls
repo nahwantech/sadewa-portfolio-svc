@@ -29,6 +29,7 @@ input NewMstPortfolio{
 
 type Query {
   mstportfolio: [MstPortfolio!]!
+  mstPortfolio(id: ID!): MstPortfolio
 }
 
 type Mutation {

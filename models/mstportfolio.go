@@ -17,3 +17,7 @@ type MstPortfolio struct {
 	UpdatedAt time.Time `json:"updated_at"`
 	UpdatedBy string `json:"updated_by"`
 }
+
+func(MstPortfolio) TableName() string{
+	return "mst_portfolio"
+}
