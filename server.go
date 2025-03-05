@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"sadewa-portfolio-svc/graph"
+	"sadewa-portfolio-svc/config"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/handler/extension"
@@ -14,9 +15,13 @@ import (
 	"github.com/vektah/gqlparser/v2/ast"
 )
 
-const defaultPort = "8080"
+const defaultPort = "8089"
 
 func main() {
+	// Initialize database
+	config.InitDB() // ✅ Calls database init without circular dependency
+
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = defaultPort
