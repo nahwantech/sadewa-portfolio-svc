@@ -10,28 +10,37 @@ import (
 	"sadewa-portfolio-svc/graph/model"
 )
 
-// CreateMstPortfolio is the resolver for the createMstPortfolio field.
-func (r *mutationResolver) CreateMstPortfolio(ctx context.Context, input model.NewMstPortfolio) (*model.MstPortfolio, error) {
-	panic(fmt.Errorf("not implemented: CreateMstPortfolio - createMstPortfolio"))
-}
-
-// Mstportfolio is the resolver for the mstportfolio field.
-func (r *queryResolver) Mstportfolio(ctx context.Context) ([]*model.MstPortfolio, error) {
-	panic(fmt.Errorf("not implemented: Mstportfolio - mstportfolio"))
+// MstPortfolios is the resolver for the mstPortfolios field.
+func (r *queryResolver) MstPortfolios(ctx context.Context) ([]*model.MstPortfolio, error) {
+	panic(fmt.Errorf("not implemented: MstPortfolios - mstPortfolios"))
 }
 
 // MstPortfolio is the resolver for the mstPortfolio field.
 func (r *queryResolver) MstPortfolio(ctx context.Context, id string) (*model.MstPortfolio, error) {
-	// panic(fmt.Errorf("not implemented: MstPortfolio - mstPortfolio"))
-	return &resolver.QueryResolver{DB: r.DB}
+	panic(fmt.Errorf("not implemented: MstPortfolio - mstPortfolio"))
 }
-
-// Mutation returns MutationResolver implementation.
-func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
 
 // Query returns QueryResolver implementation.
 func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 
-type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
 
+<<<<<<< HEAD
+=======
+// !!! WARNING !!!
+// The code below was going to be deleted when updating resolvers. It has been copied here so you have
+// one last chance to move it out of harms way if you want. There are two reasons this happens:
+//  - When renaming or deleting a resolver the old code will be put in here. You can safely delete
+//    it when you're done.
+//  - You have helper methods in this file. Move them out to keep these resolver files clean.
+/*
+	func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
+	panic(fmt.Errorf("not implemented: CreateTodo - createTodo"))
+}
+func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
+	panic(fmt.Errorf("not implemented: Todos - todos"))
+}
+func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
+type mutationResolver struct{ *Resolver }
+*/
+>>>>>>> feature/db-integration/init

@@ -18,6 +18,9 @@ import (
 const defaultPort = "8089"
 
 func main() {
+	// Initialize database
+	config.InitDB() // ✅ Calls database init without circular dependency
+
 
 	port := os.Getenv("PORT")
 	if port == "" {

@@ -39,7 +39,6 @@ type Config struct {
 }
 
 type ResolverRoot interface {
-	Mutation() MutationResolver
 	Query() QueryResolver
 }
 
@@ -48,6 +47,7 @@ type DirectiveRoot struct {
 
 type ComplexityRoot struct {
 	MstPortfolio struct {
+<<<<<<< HEAD
 		Backendstack    func(childComplexity int) int
 		Createdat       func(childComplexity int) int
 		Createdby       func(childComplexity int) int
@@ -76,6 +76,29 @@ type MutationResolver interface {
 }
 type QueryResolver interface {
 	Mstportfolio(ctx context.Context) ([]*model.MstPortfolio, error)
+=======
+		BackendStack    func(childComplexity int) int
+		CreatedAt       func(childComplexity int) int
+		CreatedBy       func(childComplexity int) int
+		DatabaseStack   func(childComplexity int) int
+		DeploymentStack func(childComplexity int) int
+		Description     func(childComplexity int) int
+		FrontendStack   func(childComplexity int) int
+		ID              func(childComplexity int) int
+		Title           func(childComplexity int) int
+		UpdatedAt       func(childComplexity int) int
+		UpdatedBy       func(childComplexity int) int
+	}
+
+	Query struct {
+		MstPortfolio  func(childComplexity int, id string) int
+		MstPortfolios func(childComplexity int) int
+	}
+}
+
+type QueryResolver interface {
+	MstPortfolios(ctx context.Context) ([]*model.MstPortfolio, error)
+>>>>>>> feature/db-integration/init
 	MstPortfolio(ctx context.Context, id string) (*model.MstPortfolio, error)
 }
 
@@ -98,6 +121,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 	_ = ec
 	switch typeName + "." + field {
 
+<<<<<<< HEAD
 	case "MstPortfolio.backendstack":
 		if e.complexity.MstPortfolio.Backendstack == nil {
 			break
@@ -132,6 +156,42 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.MstPortfolio.Deploymentstack(childComplexity), true
+=======
+	case "MstPortfolio.backend_stack":
+		if e.complexity.MstPortfolio.BackendStack == nil {
+			break
+		}
+
+		return e.complexity.MstPortfolio.BackendStack(childComplexity), true
+
+	case "MstPortfolio.created_at":
+		if e.complexity.MstPortfolio.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.MstPortfolio.CreatedAt(childComplexity), true
+
+	case "MstPortfolio.created_by":
+		if e.complexity.MstPortfolio.CreatedBy == nil {
+			break
+		}
+
+		return e.complexity.MstPortfolio.CreatedBy(childComplexity), true
+
+	case "MstPortfolio.database_stack":
+		if e.complexity.MstPortfolio.DatabaseStack == nil {
+			break
+		}
+
+		return e.complexity.MstPortfolio.DatabaseStack(childComplexity), true
+
+	case "MstPortfolio.deployment_stack":
+		if e.complexity.MstPortfolio.DeploymentStack == nil {
+			break
+		}
+
+		return e.complexity.MstPortfolio.DeploymentStack(childComplexity), true
+>>>>>>> feature/db-integration/init
 
 	case "MstPortfolio.description":
 		if e.complexity.MstPortfolio.Description == nil {
@@ -140,12 +200,21 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.MstPortfolio.Description(childComplexity), true
 
+<<<<<<< HEAD
 	case "MstPortfolio.frontendstack":
 		if e.complexity.MstPortfolio.Frontendstack == nil {
 			break
 		}
 
 		return e.complexity.MstPortfolio.Frontendstack(childComplexity), true
+=======
+	case "MstPortfolio.frontend_stack":
+		if e.complexity.MstPortfolio.FrontendStack == nil {
+			break
+		}
+
+		return e.complexity.MstPortfolio.FrontendStack(childComplexity), true
+>>>>>>> feature/db-integration/init
 
 	case "MstPortfolio.id":
 		if e.complexity.MstPortfolio.ID == nil {
@@ -161,6 +230,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.MstPortfolio.Title(childComplexity), true
 
+<<<<<<< HEAD
 	case "MstPortfolio.updatedat":
 		if e.complexity.MstPortfolio.Updatedat == nil {
 			break
@@ -181,10 +251,33 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		args, err := ec.field_Mutation_createMstPortfolio_args(context.TODO(), rawArgs)
+=======
+	case "MstPortfolio.updated_at":
+		if e.complexity.MstPortfolio.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.MstPortfolio.UpdatedAt(childComplexity), true
+
+	case "MstPortfolio.updated_by":
+		if e.complexity.MstPortfolio.UpdatedBy == nil {
+			break
+		}
+
+		return e.complexity.MstPortfolio.UpdatedBy(childComplexity), true
+
+	case "Query.mstPortfolio":
+		if e.complexity.Query.MstPortfolio == nil {
+			break
+		}
+
+		args, err := ec.field_Query_mstPortfolio_args(context.TODO(), rawArgs)
+>>>>>>> feature/db-integration/init
 		if err != nil {
 			return 0, false
 		}
 
+<<<<<<< HEAD
 		return e.complexity.Mutation.CreateMstPortfolio(childComplexity, args["input"].(model.NewMstPortfolio)), true
 
 	case "Query.mstPortfolio":
@@ -205,6 +298,16 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Query.Mstportfolio(childComplexity), true
+=======
+		return e.complexity.Query.MstPortfolio(childComplexity, args["id"].(string)), true
+
+	case "Query.mstPortfolios":
+		if e.complexity.Query.MstPortfolios == nil {
+			break
+		}
+
+		return e.complexity.Query.MstPortfolios(childComplexity), true
+>>>>>>> feature/db-integration/init
 
 	}
 	return 0, false
@@ -213,9 +316,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 func (e *executableSchema) Exec(ctx context.Context) graphql.ResponseHandler {
 	opCtx := graphql.GetOperationContext(ctx)
 	ec := executionContext{opCtx, e, 0, 0, make(chan graphql.DeferredResult)}
+<<<<<<< HEAD
 	inputUnmarshalMap := graphql.BuildUnmarshalerMap(
 		ec.unmarshalInputNewMstPortfolio,
 	)
+=======
+	inputUnmarshalMap := graphql.BuildUnmarshalerMap()
+>>>>>>> feature/db-integration/init
 	first := true
 
 	switch opCtx.Operation.Operation {
@@ -248,21 +355,6 @@ func (e *executableSchema) Exec(ctx context.Context) graphql.ResponseHandler {
 			}
 
 			return &response
-		}
-	case ast.Mutation:
-		return func(ctx context.Context) *graphql.Response {
-			if !first {
-				return nil
-			}
-			first = false
-			ctx = graphql.WithUnmarshalerMap(ctx, inputUnmarshalMap)
-			data := ec._Mutation(ctx, opCtx.Operation.SelectionSet)
-			var buf bytes.Buffer
-			data.MarshalGQL(&buf)
-
-			return &graphql.Response{
-				Data: buf.Bytes(),
-			}
 		}
 
 	default:
@@ -331,6 +423,7 @@ var parsedSchema = gqlparser.MustLoadSchema(sources...)
 
 // region    ***************************** args.gotpl *****************************
 
+<<<<<<< HEAD
 func (ec *executionContext) field_Mutation_createMstPortfolio_args(ctx context.Context, rawArgs map[string]any) (map[string]any, error) {
 	var err error
 	args := map[string]any{}
@@ -354,6 +447,8 @@ func (ec *executionContext) field_Mutation_createMstPortfolio_argsInput(
 	return zeroVal, nil
 }
 
+=======
+>>>>>>> feature/db-integration/init
 func (ec *executionContext) field_Query___type_args(ctx context.Context, rawArgs map[string]any) (map[string]any, error) {
 	var err error
 	args := map[string]any{}
@@ -532,6 +627,7 @@ func (ec *executionContext) _MstPortfolio_id(ctx context.Context, field graphql.
 }
 
 func (ec *executionContext) fieldContext_MstPortfolio_id(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+<<<<<<< HEAD
 	fc = &graphql.FieldContext{
 		Object:     "MstPortfolio",
 		Field:      field,
@@ -1016,8 +1112,494 @@ func (ec *executionContext) _Mutation_createMstPortfolio(ctx context.Context, fi
 }
 
 func (ec *executionContext) fieldContext_Mutation_createMstPortfolio(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+=======
+>>>>>>> feature/db-integration/init
 	fc = &graphql.FieldContext{
-		Object:     "Mutation",
+		Object:     "MstPortfolio",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MstPortfolio_title(ctx context.Context, field graphql.CollectedField, obj *model.MstPortfolio) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MstPortfolio_title(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Title, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MstPortfolio_title(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MstPortfolio",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MstPortfolio_description(ctx context.Context, field graphql.CollectedField, obj *model.MstPortfolio) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MstPortfolio_description(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Description, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MstPortfolio_description(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MstPortfolio",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MstPortfolio_backend_stack(ctx context.Context, field graphql.CollectedField, obj *model.MstPortfolio) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MstPortfolio_backend_stack(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.BackendStack, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MstPortfolio_backend_stack(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MstPortfolio",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MstPortfolio_frontend_stack(ctx context.Context, field graphql.CollectedField, obj *model.MstPortfolio) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MstPortfolio_frontend_stack(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.FrontendStack, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MstPortfolio_frontend_stack(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MstPortfolio",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MstPortfolio_database_stack(ctx context.Context, field graphql.CollectedField, obj *model.MstPortfolio) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MstPortfolio_database_stack(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.DatabaseStack, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MstPortfolio_database_stack(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MstPortfolio",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MstPortfolio_deployment_stack(ctx context.Context, field graphql.CollectedField, obj *model.MstPortfolio) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MstPortfolio_deployment_stack(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.DeploymentStack, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MstPortfolio_deployment_stack(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MstPortfolio",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MstPortfolio_created_at(ctx context.Context, field graphql.CollectedField, obj *model.MstPortfolio) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MstPortfolio_created_at(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MstPortfolio_created_at(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MstPortfolio",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MstPortfolio_created_by(ctx context.Context, field graphql.CollectedField, obj *model.MstPortfolio) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MstPortfolio_created_by(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedBy, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MstPortfolio_created_by(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MstPortfolio",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MstPortfolio_updated_at(ctx context.Context, field graphql.CollectedField, obj *model.MstPortfolio) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MstPortfolio_updated_at(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MstPortfolio_updated_at(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MstPortfolio",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MstPortfolio_updated_by(ctx context.Context, field graphql.CollectedField, obj *model.MstPortfolio) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MstPortfolio_updated_by(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedBy, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MstPortfolio_updated_by(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MstPortfolio",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Query_mstPortfolios(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_mstPortfolios(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().MstPortfolios(rctx)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.MstPortfolio)
+	fc.Result = res
+	return ec.marshalNMstPortfolio2ᚕᚖsadewaᚑportfolioᚑsvcᚋgraphᚋmodelᚐMstPortfolioᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Query_mstPortfolios(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Query",
 		Field:      field,
 		IsMethod:   true,
 		IsResolver: true,
@@ -1029,6 +1611,7 @@ func (ec *executionContext) fieldContext_Mutation_createMstPortfolio(ctx context
 				return ec.fieldContext_MstPortfolio_title(ctx, field)
 			case "description":
 				return ec.fieldContext_MstPortfolio_description(ctx, field)
+<<<<<<< HEAD
 			case "backendstack":
 				return ec.fieldContext_MstPortfolio_backendstack(ctx, field)
 			case "frontendstack":
@@ -1047,6 +1630,91 @@ func (ec *executionContext) fieldContext_Mutation_createMstPortfolio(ctx context
 				return ec.fieldContext_MstPortfolio_updatedby(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type MstPortfolio", field.Name)
+=======
+			case "backend_stack":
+				return ec.fieldContext_MstPortfolio_backend_stack(ctx, field)
+			case "frontend_stack":
+				return ec.fieldContext_MstPortfolio_frontend_stack(ctx, field)
+			case "database_stack":
+				return ec.fieldContext_MstPortfolio_database_stack(ctx, field)
+			case "deployment_stack":
+				return ec.fieldContext_MstPortfolio_deployment_stack(ctx, field)
+			case "created_at":
+				return ec.fieldContext_MstPortfolio_created_at(ctx, field)
+			case "created_by":
+				return ec.fieldContext_MstPortfolio_created_by(ctx, field)
+			case "updated_at":
+				return ec.fieldContext_MstPortfolio_updated_at(ctx, field)
+			case "updated_by":
+				return ec.fieldContext_MstPortfolio_updated_by(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type MstPortfolio", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Query_mstPortfolio(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_mstPortfolio(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (any, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().MstPortfolio(rctx, fc.Args["id"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*model.MstPortfolio)
+	fc.Result = res
+	return ec.marshalOMstPortfolio2ᚖsadewaᚑportfolioᚑsvcᚋgraphᚋmodelᚐMstPortfolio(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Query_mstPortfolio(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Query",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_MstPortfolio_id(ctx, field)
+			case "title":
+				return ec.fieldContext_MstPortfolio_title(ctx, field)
+			case "description":
+				return ec.fieldContext_MstPortfolio_description(ctx, field)
+			case "backend_stack":
+				return ec.fieldContext_MstPortfolio_backend_stack(ctx, field)
+			case "frontend_stack":
+				return ec.fieldContext_MstPortfolio_frontend_stack(ctx, field)
+			case "database_stack":
+				return ec.fieldContext_MstPortfolio_database_stack(ctx, field)
+			case "deployment_stack":
+				return ec.fieldContext_MstPortfolio_deployment_stack(ctx, field)
+			case "created_at":
+				return ec.fieldContext_MstPortfolio_created_at(ctx, field)
+			case "created_by":
+				return ec.fieldContext_MstPortfolio_created_by(ctx, field)
+			case "updated_at":
+				return ec.fieldContext_MstPortfolio_updated_at(ctx, field)
+			case "updated_by":
+				return ec.fieldContext_MstPortfolio_updated_by(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type MstPortfolio", field.Name)
+>>>>>>> feature/db-integration/init
 		},
 	}
 	defer func() {
@@ -1056,13 +1724,18 @@ func (ec *executionContext) fieldContext_Mutation_createMstPortfolio(ctx context
 		}
 	}()
 	ctx = graphql.WithFieldContext(ctx, fc)
+<<<<<<< HEAD
 	if fc.Args, err = ec.field_Mutation_createMstPortfolio_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+=======
+	if fc.Args, err = ec.field_Query_mstPortfolio_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+>>>>>>> feature/db-integration/init
 		ec.Error(ctx, err)
 		return fc, err
 	}
 	return fc, nil
 }
 
+<<<<<<< HEAD
 func (ec *executionContext) _Query_mstportfolio(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Query_mstportfolio(ctx, field)
 	if err != nil {
@@ -1207,6 +1880,8 @@ func (ec *executionContext) fieldContext_Query_mstPortfolio(ctx context.Context,
 	return fc, nil
 }
 
+=======
+>>>>>>> feature/db-integration/init
 func (ec *executionContext) _Query___type(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Query___type(ctx, field)
 	if err != nil {
@@ -3289,6 +3964,7 @@ func (ec *executionContext) fieldContext___Type_isOneOf(_ context.Context, field
 
 // region    **************************** input.gotpl *****************************
 
+<<<<<<< HEAD
 func (ec *executionContext) unmarshalInputNewMstPortfolio(ctx context.Context, obj any) (model.NewMstPortfolio, error) {
 	var it model.NewMstPortfolio
 	asMap := map[string]any{}
@@ -3386,6 +4062,8 @@ func (ec *executionContext) unmarshalInputNewMstPortfolio(ctx context.Context, o
 	return it, nil
 }
 
+=======
+>>>>>>> feature/db-integration/init
 // endregion **************************** input.gotpl *****************************
 
 // region    ************************** interface.gotpl ***************************
@@ -3395,6 +4073,7 @@ func (ec *executionContext) unmarshalInputNewMstPortfolio(ctx context.Context, o
 // region    **************************** object.gotpl ****************************
 
 var mstPortfolioImplementors = []string{"MstPortfolio"}
+<<<<<<< HEAD
 
 func (ec *executionContext) _MstPortfolio(ctx context.Context, sel ast.SelectionSet, obj *model.MstPortfolio) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, mstPortfolioImplementors)
@@ -3484,28 +4163,78 @@ func (ec *executionContext) _MstPortfolio(ctx context.Context, sel ast.Selection
 }
 
 var mutationImplementors = []string{"Mutation"}
+=======
+>>>>>>> feature/db-integration/init
 
-func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet) graphql.Marshaler {
-	fields := graphql.CollectFields(ec.OperationContext, sel, mutationImplementors)
-	ctx = graphql.WithFieldContext(ctx, &graphql.FieldContext{
-		Object: "Mutation",
-	})
+func (ec *executionContext) _MstPortfolio(ctx context.Context, sel ast.SelectionSet, obj *model.MstPortfolio) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, mstPortfolioImplementors)
 
 	out := graphql.NewFieldSet(fields)
 	deferred := make(map[string]*graphql.FieldSet)
 	for i, field := range fields {
-		innerCtx := graphql.WithRootFieldContext(ctx, &graphql.RootFieldContext{
-			Object: field.Name,
-			Field:  field,
-		})
-
 		switch field.Name {
 		case "__typename":
+<<<<<<< HEAD
 			out.Values[i] = graphql.MarshalString("Mutation")
 		case "createMstPortfolio":
 			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
 				return ec._Mutation_createMstPortfolio(ctx, field)
 			})
+=======
+			out.Values[i] = graphql.MarshalString("MstPortfolio")
+		case "id":
+			out.Values[i] = ec._MstPortfolio_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "title":
+			out.Values[i] = ec._MstPortfolio_title(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "description":
+			out.Values[i] = ec._MstPortfolio_description(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "backend_stack":
+			out.Values[i] = ec._MstPortfolio_backend_stack(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "frontend_stack":
+			out.Values[i] = ec._MstPortfolio_frontend_stack(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "database_stack":
+			out.Values[i] = ec._MstPortfolio_database_stack(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deployment_stack":
+			out.Values[i] = ec._MstPortfolio_deployment_stack(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "created_at":
+			out.Values[i] = ec._MstPortfolio_created_at(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "created_by":
+			out.Values[i] = ec._MstPortfolio_created_by(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updated_at":
+			out.Values[i] = ec._MstPortfolio_updated_at(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updated_by":
+			out.Values[i] = ec._MstPortfolio_updated_by(ctx, field, obj)
+>>>>>>> feature/db-integration/init
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -3551,7 +4280,11 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("Query")
+<<<<<<< HEAD
 		case "mstportfolio":
+=======
+		case "mstPortfolios":
+>>>>>>> feature/db-integration/init
 			field := field
 
 			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
@@ -3560,7 +4293,11 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 						ec.Error(ctx, ec.Recover(ctx, r))
 					}
 				}()
+<<<<<<< HEAD
 				res = ec._Query_mstportfolio(ctx, field)
+=======
+				res = ec._Query_mstPortfolios(ctx, field)
+>>>>>>> feature/db-integration/init
 				if res == graphql.Null {
 					atomic.AddUint32(&fs.Invalids, 1)
 				}
@@ -3988,10 +4725,13 @@ func (ec *executionContext) marshalNID2string(ctx context.Context, sel ast.Selec
 	return res
 }
 
+<<<<<<< HEAD
 func (ec *executionContext) marshalNMstPortfolio2sadewaᚑportfolioᚑsvcᚋgraphᚋmodelᚐMstPortfolio(ctx context.Context, sel ast.SelectionSet, v model.MstPortfolio) graphql.Marshaler {
 	return ec._MstPortfolio(ctx, sel, &v)
 }
 
+=======
+>>>>>>> feature/db-integration/init
 func (ec *executionContext) marshalNMstPortfolio2ᚕᚖsadewaᚑportfolioᚑsvcᚋgraphᚋmodelᚐMstPortfolioᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.MstPortfolio) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
@@ -4046,11 +4786,14 @@ func (ec *executionContext) marshalNMstPortfolio2ᚖsadewaᚑportfolioᚑsvcᚋg
 	return ec._MstPortfolio(ctx, sel, v)
 }
 
+<<<<<<< HEAD
 func (ec *executionContext) unmarshalNNewMstPortfolio2sadewaᚑportfolioᚑsvcᚋgraphᚋmodelᚐNewMstPortfolio(ctx context.Context, v any) (model.NewMstPortfolio, error) {
 	res, err := ec.unmarshalInputNewMstPortfolio(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
+=======
+>>>>>>> feature/db-integration/init
 func (ec *executionContext) unmarshalNString2string(ctx context.Context, v any) (string, error) {
 	res, err := graphql.UnmarshalString(v)
 	return res, graphql.ErrorOnPath(ctx, err)

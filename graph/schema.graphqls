@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 type MstPortfolio{
   id: ID!
@@ -35,3 +36,23 @@ type Query {
 type Mutation {
   createMstPortfolio(input: NewMstPortfolio!): MstPortfolio!
 }
+=======
+type MstPortfolio {
+  id: ID!
+  title: String!
+  description: String!
+  backend_stack: String!
+  frontend_stack: String!
+  database_stack: String!
+  deployment_stack: String!
+  created_at: String!
+  created_by: String!
+  updated_at: String!
+  updated_by: String!
+}
+
+type Query {
+  mstPortfolios: [MstPortfolio!]!
+  mstPortfolio(id: ID!): MstPortfolio
+}
+>>>>>>> feature/db-integration/init
