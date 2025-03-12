@@ -31,6 +31,7 @@ func main() {
 	database.ConnectDB()
 
 	srv := handler.New(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{}}))
+	// srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
 
 	srv.AddTransport(transport.Options{})
 	srv.AddTransport(transport.GET{})
