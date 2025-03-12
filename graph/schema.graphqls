@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 type MstPortfolio{
   id: ID!
@@ -37,6 +38,10 @@ type Mutation {
   createMstPortfolio(input: NewMstPortfolio!): MstPortfolio!
 }
 =======
+=======
+scalar Time
+
+>>>>>>> 4fd5918 (still error db integration)
 type MstPortfolio {
   id: ID!
   title: String!
@@ -45,9 +50,9 @@ type MstPortfolio {
   frontend_stack: String!
   database_stack: String!
   deployment_stack: String!
-  created_at: String!
+  created_at: Time!
   created_by: String!
-  updated_at: String!
+  updated_at: Time!
   updated_by: String!
 }
 

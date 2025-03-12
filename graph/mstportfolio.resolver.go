@@ -1,18 +1,16 @@
-package resolver
+package graph
 
 import (
 	"context"
 	"fmt"
-	"time"
 
 	"sadewa-portfolio-svc/config" // ✅ Correct way to import database
 	"sadewa-portfolio-svc/graph/model"
-	"sadewa-portfolio-svc/models"
 )
 
 // Fetch all mst_portfolios
-func (r *QueryResolver) MstPortfolios(ctx context.Context) ([]*model.MstPortfolio, error) {
-	var mstportfolios []models.MstPortfolio
+func (r *Resolver) MstPortfolios(ctx context.Context) ([]*model.MstPortfolio, error) {
+	var mstportfolios []model.MstPortfolio
 
 	// Use `config.DB` for database queries
 	if err := config.DB.Find(&mstportfolios).Error; err != nil {
@@ -30,9 +28,9 @@ func (r *QueryResolver) MstPortfolios(ctx context.Context) ([]*model.MstPortfoli
 			FrontendStack:   mp.FrontendStack,
 			DatabaseStack:   mp.DatabaseStack,
 			DeploymentStack: mp.DeploymentStack,
-			CreatedAt:       mp.CreatedAt.Format(time.RFC3339),
+			CreatedAt:       mp.CreatedAt,
 			CreatedBy:       mp.CreatedBy,
-			UpdatedAt:       mp.UpdatedAt.Format(time.RFC3339),
+			UpdatedAt:       mp.UpdatedAt,
 			UpdatedBy:       mp.UpdatedBy,
 		})
 	}

@@ -7,12 +7,38 @@ package graph
 import (
 	"context"
 	"fmt"
+	"sadewa-portfolio-svc/config"
 	"sadewa-portfolio-svc/graph/model"
 )
 
-// MstPortfolios is the resolver for the mstPortfolios field.
+// Fetch all mst_portfolios
 func (r *queryResolver) MstPortfolios(ctx context.Context) ([]*model.MstPortfolio, error) {
-	panic(fmt.Errorf("not implemented: MstPortfolios - mstPortfolios"))
+	var mstportfolios []model.MstPortfolio
+
+	// Use `config.DB` for database queries
+	if err := config.DB.Find(&mstportfolios).Error; err != nil {
+		return nil, err
+	}
+
+	// Convert database models to GraphQL models
+	var result []*model.MstPortfolio
+	for _, mp := range mstportfolios {
+		result = append(result, &model.MstPortfolio{
+			ID:              fmt.Sprintf("%d", mp.ID),
+			Title:           mp.Title,
+			Description:     mp.Description,
+			BackendStack:    mp.BackendStack,
+			FrontendStack:   mp.FrontendStack,
+			DatabaseStack:   mp.DatabaseStack,
+			DeploymentStack: mp.DeploymentStack,
+			CreatedAt:       mp.CreatedAt,
+			CreatedBy:       mp.CreatedBy,
+			UpdatedAt:       mp.UpdatedAt,
+			UpdatedBy:       mp.UpdatedBy,
+		})
+	}
+
+	return result, nil
 }
 
 // MstPortfolio is the resolver for the mstPortfolio field.
@@ -24,6 +50,7 @@ func (r *queryResolver) MstPortfolio(ctx context.Context, id string) (*model.Mst
 func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 
 type queryResolver struct{ *Resolver }
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
@@ -44,3 +71,5 @@ func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
 type mutationResolver struct{ *Resolver }
 */
 >>>>>>> feature/db-integration/init
+=======
+>>>>>>> 4fd5918 (still error db integration)

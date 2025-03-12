@@ -2,18 +2,22 @@
 
 package model
 
+import (
+	"time"
+)
+
 type MstPortfolio struct {
-	ID              string `json:"id"`
-	Title           string `json:"title"`
-	Description     string `json:"description"`
-	BackendStack    string `json:"backend_stack"`
-	FrontendStack   string `json:"frontend_stack"`
-	DatabaseStack   string `json:"database_stack"`
-	DeploymentStack string `json:"deployment_stack"`
-	CreatedAt       string `json:"created_at"`
-	CreatedBy       string `json:"created_by"`
-	UpdatedAt       string `json:"updated_at"`
-	UpdatedBy       string `json:"updated_by"`
+	ID              string    `json:"id"`
+	Title           string    `json:"title"`
+	Description     string    `json:"description"`
+	BackendStack    string    `json:"backend_stack"`
+	FrontendStack   string    `json:"frontend_stack"`
+	DatabaseStack   string    `json:"database_stack"`
+	DeploymentStack string    `json:"deployment_stack"`
+	CreatedAt       time.Time `json:"created_at"`
+	CreatedBy       string    `json:"created_by"`
+	UpdatedAt       time.Time `json:"updated_at"`
+	UpdatedBy       string    `json:"updated_by"`
 }
 
 type Query struct {
