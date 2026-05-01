@@ -6,6 +6,7 @@ import (
 
 	"sadewa-portfolio-svc/config"
 	"sadewa-portfolio-svc/graph/resolvers"
+	"sadewa-portfolio-svc/handlers"
 
 	"github.com/joho/godotenv"
 	"os"
@@ -38,6 +39,9 @@ func main() {
 	// connect to db
 	config.ConnectDB()
 	
+	// connect to MinIO
+	config.ConnectMinio()
+	
 	// http.Handle("/query", handler.GraphQL(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{}})))
 	// Set up GraphQL server
     // Initialize the GraphQL server
@@ -53,6 +57,10 @@ func main() {
 
 	http.Handle("/query", srv)
 	http.Handle("/", playground.Handler("GraphQL Playground", "/query"))
+
+	// File upload and download endpoints
+	http.HandleFunc("/api/s3/upload", handlers.UploadFileHandler)
+	http.HandleFunc("/api/s3/download", handlers.DownloadFileHandler)
 
 
 
