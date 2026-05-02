@@ -13,6 +13,7 @@ MINIO_SECRET_KEY=sakaya0903#$
 MINIO_USE_SSL=false
 ```
 
+
 ## Supported File Types
 
 The API only accepts the following file types:
