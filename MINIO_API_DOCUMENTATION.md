@@ -7,10 +7,10 @@ This document describes how to use the MinIO file upload and download endpoints 
 MinIO credentials are configured in the `.env` file:
 
 ```env
-MINIO_ENDPOINT=91.108.104.69:9001
-MINIO_ACCESS_KEY=nahwan_alsaki
-MINIO_SECRET_KEY=sakaya0903#$
-MINIO_USE_SSL=false
+MINIO_ENDPOINT=xx
+MINIO_ACCESS_KEY=xx
+MINIO_SECRET_KEY=xx
+MINIO_USE_SSL=xx
 ```
 
 
