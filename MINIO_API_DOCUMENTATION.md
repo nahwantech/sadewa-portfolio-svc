@@ -144,7 +144,6 @@ Returns the file content with appropriate headers:
 3. The file will be displayed or downloaded based on its type
 
 ## Error Handling
-
 The API handles various error scenarios:
 - Missing bucket name
 - Missing file in upload request
