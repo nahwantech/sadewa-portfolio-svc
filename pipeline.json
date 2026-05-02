@@ -1,0 +1,12 @@
+{
+    "appName": "sadewa-portfolio-svc",
+    "sonarExcludePath": "ns-cicd/*,graph/resolvers/*",
+    "is_unit_test": "yes",
+    "language": "go",
+    "testPackages": "./graphqlutils/... ./graph/model/...",
+    "sonarCoverageInclusions": "graphqlutils/**/*.go,graph/model/**/*.go",
+    "sonarTestInclusions": "**/*_test.go",
+    "enableSCA": "true",
+    "enableSCAHardGate": "false",
+    "needEnvFile": "yes"
+}
