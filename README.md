@@ -5,3 +5,4 @@ go run server.go
 gqlgen generate
 
 # Implement REST API and Graphql
+This service implement both api , REST and Graphql, 
